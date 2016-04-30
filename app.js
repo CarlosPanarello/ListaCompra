@@ -16,9 +16,17 @@ app.post('/listaCompra',function(req,res){
 	
 	var descricao = validator.trim(validator.escape(req.body.descricao));
 	
-	var itens = [
-		{'descricao':'Item 1',jaComprou:true},
-		{'descricao':'Item 2',jaComprou:false}];
+	var inputItens = req.body.itens;
+	var itens=[];
+
+	for (var i = 0, l = inputItens.length; i < l; i++) {
+    	var obj = inputItens[i];
+		
+		obj.jaComprou = false;
+		obj.descricao = validator.trim(validator.escape(obj.descricao));
+		
+		itens[i] = obj;
+    }
 	
 	listaCompraController.save(descricao,itens, function(resp){
 		res.json(resp);
@@ -39,12 +47,20 @@ app.put('/listaCompra/:id',function(req,res){
 	console.log('update listaCompra via update .' + req.params.id);
 	
 	var id = validator.trim(validator.escape(req.params.id));
-	var descricao = validator.trim(validator.escape(req.body.fullname));
-	
-	var itens = [
-		{'descricao':'Item 11',jaComprou:false},
-		{'descricao':'Item 22',jaComprou:true}];
-	
+	var descricao = validator.trim(validator.escape(req.body.descricao));
+ 
+	var inputItens = req.body.itens;
+	var itens=[];
+
+	for (var i = 0, l = inputItens.length; i < l; i++) {
+    	var obj = inputItens[i];
+		
+		obj.jaComprou = validator.toBoolean(obj.jaComprou,1);
+		obj.descricao = validator.trim(validator.escape(obj.descricao));
+		
+		itens[i] = obj;
+    }
+ 
 	listaCompraController.update(id,descricao,itens, function(resp){
 		res.json(resp);
 	});

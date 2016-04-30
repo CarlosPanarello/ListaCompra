@@ -15,7 +15,7 @@ db.once('open',function(){
 	
 	var listaCompraSchema = mongoose.Schema({
 		descricao: String,
-		itens:[itemQuestaoSchema]
+		itens:[itemCompraSchema]
 	});
 	
 	exports.ListaCompra = mongoose.model('ListaCompra',listaCompraSchema);
