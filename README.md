@@ -1,2 +1,2 @@
 # ListaCompra
-Serviço CRUD para inclusao de um lista de compras
+Serviço CRUD para inclusao de uma lista de compras
