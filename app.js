@@ -43,6 +43,20 @@ app.delete('/listaCompra/:id',function(req,res){
 	});
 });
 
+app.delete('/listaCompra/:idLista/itemCompra/:idItem',function(req,res){
+	console.log('delete ItemCompra.' + req.params.idItem);
+	console.log('delete listaCompra.' + req.params.idLista);
+
+	var idLista = validator.trim(validator.escape(req.params.idLista));
+	var idItem = validator.trim(validator.escape(req.params.idItem));
+
+	listaCompraController.removeItem(idLista,idItem,function (resp){
+		res.json(resp);
+	});
+	
+});
+
+
 app.put('/listaCompra/:id',function(req,res){
 	console.log('update listaCompra via update .' + req.params.id);
 	

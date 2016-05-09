@@ -68,6 +68,18 @@ exports.update = function(id,descricao,itens,callback){
 	});
 };
 
+exports.removeItem = function(idLista,idItem,callback){
+	db.ListaCompra.findOneAndUpdate({_id : idLista}, 
+	{$pull: {itens: {_id: idItem }}},
+	function(error,listaCompra){
+				if(!error){
+					callback({response:'Item de compra excluído com sucesso.'});
+				}
+			}
+	
+	);
+}
+
 exports.delete = function(id,callback){
 	db.ListaCompra.findById(id,function(error, listaCompra){
 		if(error){
